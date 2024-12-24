@@ -110,14 +110,14 @@ For detailed usage and API references, check out the [Documentation](#).
 ---
 ## 🤝 Contributing
 
-We welcome contributions! Read more about contributing [guidelines](CONTRIBUTING)
+We welcome contributions! Read more about contributing [guidelines](CONTRIBUTING.md)
 
 ---
 
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [Apache License](LICENSE).
 
 ---
 
