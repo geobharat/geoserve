@@ -3,17 +3,16 @@ import { apiResponse } from "./enums";
 
 export type ResponseType<T> = Promise<
 	| {
-		message: GSReponseEnum;
-		data: null;
-		status_code: GSResponseCode;
-	}
+			message: GSReponseEnum;
+			data: null;
+			status_code: GSResponseCode;
+	  }
 	| {
-		message: GSReponseEnum._200;
-		data: T;
-		status_code: GSResponseCode._200;
-	}
->
-
+			message: GSReponseEnum._200;
+			data: T;
+			status_code: GSResponseCode._200;
+	  }
+>;
 
 export async function apiHandler<T>(
 	url: string,
