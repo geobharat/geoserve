@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from "vitest";
-import { AsyncGeoserveX } from "./gsp";
-import { apiResponse } from "../utils/index";
-import { WorkspacesModelType } from "../models";
-import { apiHandler } from "../utils/httpHandler";
+import { AsyncGeoserveX } from "./gsp.js";
+import { apiResponse } from "../utils/index.js";
+import { WorkspacesModelType } from "../models/index.js";
+import { apiHandler } from "../utils/httpHandler.js";
 
 
 vi.mock("../utils/httpHandler", () => ({
@@ -40,8 +40,8 @@ describe("AsyncGeoserveX", () => {
             {
                 method: "GET",
                 headers: {
-                    "content-type": "application/json",
-                    accept: "application/json",
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
                     Authorization: `Basic ${credentials}`,
                 },
             }

@@ -1,5 +1,6 @@
-import type { GSReponseEnum, GSResponseCode } from "./enums";
-import { apiResponse } from "./enums";
+import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
+import type { GSReponseEnum, GSResponseCode } from "./enums.js";
+import { apiResponse } from "./enums.js";
 
 export type ResponseType<T> = Promise<
 	| {
@@ -16,15 +17,17 @@ export type ResponseType<T> = Promise<
 
 export async function apiHandler<T>(
 	url: string,
-	options: RequestInit = {},
-): ResponseType<T> {
-	const response = await fetch(url, options);
+	config: AxiosRequestConfig = {},
+): Promise<ResponseType<T>> {
+	try {
+		const response: AxiosResponse<T> = await axios({ url, ...config });
 
-	if (!response.ok) {
-		const status = `_${response.status}` as keyof typeof GSResponseCode;
+		return apiResponse("_200", response.data);
+	} catch (error) {
+		//@ts-ignore
+		const statusCode = (error)?.response?.status || 500;
+		const status = `_${statusCode}` as keyof typeof GSResponseCode;
+
 		return apiResponse(status, null);
 	}
-
-	const data = await response.json();
-	return apiResponse("_200", data as T);
 }

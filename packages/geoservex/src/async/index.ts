@@ -1,1 +1,1 @@
-export * from "./gsp";
+export * from "./gsp.js";

@@ -1,19 +1,16 @@
+import type { AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
 import type {
 	NewWorkspaceInfoType,
 	WorkspaceModelType,
 	WorkspacesModelType,
-} from "../models/index";
-import { apiHandler } from "../utils/index";
-
-interface Request extends RequestInit {
-	method: "GET" | "POST" | "DELETE" | "PUT";
-}
+} from "../models/index.js";
+import { apiHandler } from "../utils/index.js";
 
 export class AsyncGeoserveX {
 	protected username: string;
 	protected password: string;
 	public url: string;
-	public head: Record<string, string>;
+	public head: RawAxiosRequestHeaders;
 
 	constructor(
 		username = "admin",
@@ -24,12 +21,12 @@ export class AsyncGeoserveX {
 		this.password = password;
 		this.url = url;
 		this.head = {
-			"content-type": "application/json",
-			accept: "application/json",
+			"Content-Type": "application/json",
+			Accept: "application/json",
 		};
 	}
 
-	private getAuthHeaders(): HeadersInit {
+	private getAuthHeaders(): RawAxiosRequestHeaders {
 		const credentials = btoa(`${this.username}:${this.password}`); // Base64
 		return {
 			...this.head,
@@ -39,7 +36,7 @@ export class AsyncGeoserveX {
 
 	public async getAllWorkspace() {
 		const endpoint = `${this.url}workspaces`;
-		const options: Request = {
+		const options: AxiosRequestConfig = {
 			method: "GET",
 			headers: this.getAuthHeaders(),
 		};
@@ -48,37 +45,31 @@ export class AsyncGeoserveX {
 
 	public async getWorkspace(workspace: string) {
 		const endpoint = `${this.url}workspaces/${workspace}`;
-		const options: Request = {
+		const options: AxiosRequestConfig = {
 			method: "GET",
 			headers: this.getAuthHeaders(),
 		};
-
-		const result = apiHandler<WorkspaceModelType>(endpoint, options);
-		return result;
+		return apiHandler<WorkspaceModelType>(endpoint, options);
 	}
 
 	public async createWorkspace(
 		workspace: NewWorkspaceInfoType & { default: boolean },
 	) {
 		const endpoint = `${this.url}workspaces?default=${workspace.default}`;
-
-		const options: Request = {
+		const options: AxiosRequestConfig = {
 			method: "POST",
 			headers: this.getAuthHeaders(),
-			body: JSON.stringify({ workspace }),
+			data: { workspace },
 		};
-
 		return apiHandler<unknown>(endpoint, options);
 	}
 
-	public async deconsteWorkspace(workspaceName: string, recurse = false) {
+	public async deleteWorkspace(workspaceName: string, recurse = false) {
 		const endpoint = `${this.url}workspaces/${workspaceName}?recurse=${recurse}`;
-
-		const options: Request = {
+		const options: AxiosRequestConfig = {
 			method: "DELETE",
 			headers: this.getAuthHeaders(),
 		};
-
 		return apiHandler<unknown>(endpoint, options);
 	}
 }
