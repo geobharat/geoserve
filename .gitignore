@@ -2,3 +2,4 @@ node_modules
 dist
 site
 pnpm-lock.yaml
+apps
