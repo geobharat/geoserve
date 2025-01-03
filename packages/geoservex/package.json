@@ -18,6 +18,7 @@
 	},
 	"main": "./dist/esm/index.js",
 	"types": "./dist/esm/index.d.ts",
+	"bin": "./dist/cli/index.cjs",
 	"scripts": {
 		"dev": "tsup --watch",
 		"build": "tsup"
@@ -30,6 +31,8 @@
 		"typescript": "^5.7.2"
 	},
 	"dependencies": {
-		"axios": "^1.7.9"
+		"axios": "^1.7.9",
+		"console-table-printer": "^2.12.1",
+		"termost": "^1.4.0"
 	}
 }

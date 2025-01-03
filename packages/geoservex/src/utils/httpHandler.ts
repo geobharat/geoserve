@@ -25,7 +25,7 @@ export async function apiHandler<T>(
 		return apiResponse("_200", response.data);
 	} catch (error) {
 		//@ts-ignore
-		const statusCode = (error)?.response?.status || 500;
+		const statusCode = error?.response?.status || 500;
 		const status = `_${statusCode}` as keyof typeof GSResponseCode;
 
 		return apiResponse(status, null);

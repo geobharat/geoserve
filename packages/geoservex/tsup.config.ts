@@ -5,7 +5,7 @@ const commonConfig: Options = {
 	clean: true,
 	dts: true,
 	minify: true,
-	splitting: false,
+	splitting: true,
 	treeshake: true,
 	tsconfig: "tsconfig.json",
 };
@@ -14,10 +14,9 @@ export default defineConfig((options) => {
 	const isWatchMode = !!options.watch;
 
 	return [
-		// Browser/ESM build
 		{
 			...commonConfig,
-			entry: ["src/**/**.ts", "!src/**/*.test.*"],
+			entry: ["src/**/**.ts", "!src/**/*.test.*", "!src/cli/**.ts"],
 			format: ["esm"],
 			platform: "browser",
 			target: "es2020",
@@ -30,10 +29,10 @@ export default defineConfig((options) => {
 			minify: !isWatchMode,
 			treeshake: !isWatchMode,
 		},
-		// Node.js/CJS build
+
 		{
 			...commonConfig,
-			entry: ["src/**/**.ts", "!src/**/*.test.*"],
+			entry: ["src/**/**.ts", "!src/**/*.test.*", "!src/cli/**.ts"],
 			format: ["cjs"],
 			platform: "node",
 			outDir: "dist/cjs",
@@ -44,6 +43,15 @@ export default defineConfig((options) => {
 			},
 			minify: !isWatchMode,
 			treeshake: !isWatchMode,
+		},
+
+		{
+			outDir: "dist/cli",
+			bundle: true,
+			entry: ["src/cli/index.ts"],
+			noExternal: ["axios", "termost", "console-table-printer"],
+			platform: "node",
+			minify: true,
 		},
 	];
 });
