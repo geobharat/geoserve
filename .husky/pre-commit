@@ -1,0 +1,9 @@
+# run vitest
+npx vitest --run
+
+# run format
+npm run format
+
+# run linting
+npm run lint
+

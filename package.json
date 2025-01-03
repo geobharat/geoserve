@@ -1,13 +1,22 @@
 {
-  "name": "geoserverx-js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "pnpm --parallel --stream -r run dev",
-    "build": "pnpm --parallel --stream -r run build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT"
+	"name": "geoserverx-js",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "pnpm --parallel --stream -r run dev",
+		"build": "pnpm --parallel --stream -r run build",
+		"lint": "biome lint .",
+		"format": "biome format --write .",
+		"test": "vitest",
+		"prepare": "husky"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"husky": "^9.1.7",
+		"vitest": "^2.1.8"
+	}
 }

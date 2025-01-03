@@ -21,11 +21,10 @@
 
 ## 🛠️ Tech Stack
 
-- **Node.js**: The runtime for building scalable and efficient applications.
 - **TypeScript**: Ensuring type safety and code reliability.
 - **Jest**: For rigorous testing and code coverage.
 - **pnpm Workspace**: Manage your monorepo efficiently.
-- **Prettier & ESLint**: Keep your code clean and consistent.
+- **Biome**: Keep your code clean and consistent.
 
 ---
 
