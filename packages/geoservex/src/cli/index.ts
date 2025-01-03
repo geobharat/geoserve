@@ -34,7 +34,7 @@ program
 			// response.data!.workspaces.workspace
 
 			if (response.data !== null) {
-				printTable(response.data!.workspaces.workspace || []);
+				printTable(response.data?.workspaces.workspace || []);
 			}
 		},
 	});
